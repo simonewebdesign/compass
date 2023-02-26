@@ -93,7 +93,7 @@ module Compass
       return false unless config_file
       config_mtime = File.mtime(config_file)
       css_files.each do |css_filename|
-        return config_file if File.exists?(css_filename) && config_mtime > File.mtime(css_filename)
+        return config_file if File.exist?(css_filename) && config_mtime > File.mtime(css_filename)
       end
       nil
     end

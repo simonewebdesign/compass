@@ -51,7 +51,7 @@ module Compass
           compiler.logger.red do
             compiler.logger.log "Compilation failed in #{compiler.error_count} files."
           end
-          failed! 
+          failed!
         end
       end
 
@@ -73,7 +73,7 @@ module Compass
         return false unless config_file
         config_mtime = File.mtime(config_file)
         compiler.file_list.each do |(_, css_filename, _)|
-          return config_file if File.exists?(css_filename) && config_mtime > File.mtime(css_filename)
+          return config_file if File.exist?(css_filename) && config_mtime > File.mtime(css_filename)
         end
         nil
       end

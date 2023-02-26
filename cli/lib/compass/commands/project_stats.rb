@@ -97,7 +97,7 @@ module Compass
 
       def sorted_sass_files(compiler)
         sass_files = compiler.sass_files
-        sass_files.map! do |s| 
+        sass_files.map! do |s|
           filename = Compass.deprojectize(s, File.join(Compass.configuration.project_path, Compass.configuration.sass_dir))
           [s, File.dirname(filename), File.basename(filename)]
         end
@@ -121,7 +121,7 @@ module Compass
       end
 
       def css_columns(css_file)
-        if File.exists?(css_file)
+        if File.exist?(css_file)
           cf = Compass::Stats::CssFile.new(css_file)
           cf.analyze!
           %w(selector_count prop_count file_size).map do |t|

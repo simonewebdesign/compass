@@ -2,11 +2,11 @@ module Compass
   module SassExtensions
     module Sprites
       module SpriteMethods
-        
+
         # Changing this string will invalidate all previously generated sprite images.
         # We should do so only when the packing algorithm changes
         SPRITE_VERSION = "2"
-        
+
         # Calculates the overal image dimensions
         # collects image sizes and input parameters for each sprite
         # Calculates the height
@@ -16,14 +16,14 @@ module Compass
           compute_image_positions!
           init_engine
         end
-        
+
         def init_engine
           @engine = eval("::Compass::SassExtensions::Sprites::#{modulize}Engine.new(nil, nil, nil)")
           @engine.width = @width
           @engine.height = @height
           @engine.images = @images
         end
-        
+
         # Creates the Sprite::Image objects for each image and calculates the width
         def init_images
           @images = Images.new
@@ -61,7 +61,7 @@ module Compass
             log :unchanged, filename
           end
         end
-        
+
         def cleanup_old_sprites
           Sass::Util.glob(File.join(Compass.configuration.generated_images_path, "#{path}-s*.png")).each do |file|
             log :remove, file
@@ -69,10 +69,10 @@ module Compass
             Compass.configuration.run_sprite_removed(file)
           end
         end
-        
+
         # Does this sprite need to be generated
         def generation_required?
-          !File.exists?(filename) || outdated? || options[:force]
+          !File.exist?(filename) || outdated? || options[:force]
         end
 
         # Returns the uniqueness hash for this sprite object
@@ -109,7 +109,7 @@ module Compass
 
         # Checks whether this sprite is outdated
         def outdated?
-          if File.exists?(filename)
+          if File.exist?(filename)
             return @images.any? {|image| image.mtime.to_i > self.mtime.to_i }
           end
           true
@@ -119,7 +119,7 @@ module Compass
         def mtime
           @mtime ||= File.mtime(filename)
         end
-        
+
        # Calculate the size of the sprite
         def size
           [width, height]

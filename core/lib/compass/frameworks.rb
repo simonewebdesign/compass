@@ -94,7 +94,7 @@ module Compass
         File.join(directory, 'lib', File.basename(directory)+".rb"),
         File.join(directory, File.basename(directory)+".rb")
       ]
-      loader = loaders.detect{|l| File.exists?(l)}
+      loader = loaders.detect{|l| File.exist?(l)}
       registered_framework = detect_registration do
         require loader if loader
       end
@@ -117,7 +117,7 @@ module Compass
       framework = self[framework_name]
       template ||= "project"
       usage_file = File.join(framework.templates_directory, template, "USAGE.markdown")
-      if File.exists?(usage_file)
+      if File.exist?(usage_file)
         File.read(usage_file)
       elsif help = framework.manifest(template).help
         help

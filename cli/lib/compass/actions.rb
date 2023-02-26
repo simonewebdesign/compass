@@ -14,7 +14,7 @@ module Compass
         contents = File.new(from,"rb").read
       else
         contents = File.new(from).read
-      end  
+      end
       write_file to, contents, options, binary
     end
 
@@ -22,9 +22,9 @@ module Compass
     def directory(dir, options = nil)
       options ||= self.options if self.respond_to?(:options)
       options ||= {}
-      if File.exists?(dir) && File.directory?(dir)
+      if File.exist?(dir) && File.directory?(dir)
           # do nothing
-      elsif File.exists?(dir)
+      elsif File.exist?(dir)
         msg = "#{basename(dir)} already exists and is not a directory."
         raise Compass::FilesystemConflict.new(msg)
       else
@@ -38,7 +38,7 @@ module Compass
       options ||= self.options if self.respond_to?(:options)
       skip_write = false
       contents = process_erb(contents, options[:erb]) if options[:erb]
-      if File.exists?(file_name)
+      if File.exist?(file_name)
         existing_contents = IO.read(file_name)
         if existing_contents == contents
           log_action :identical, basename(file_name), options
@@ -73,7 +73,7 @@ module Compass
       if File.directory?(file_name)
         FileUtils.rm_rf file_name
         log_action :remove, basename(file_name)+"/", options
-      elsif File.exists?(file_name)
+      elsif File.exist?(file_name)
         File.unlink file_name
         log_action :remove, basename(file_name), options
       end

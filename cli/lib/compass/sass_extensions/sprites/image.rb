@@ -32,7 +32,7 @@ module Compass
         def find_file
           Compass.configuration.sprite_load_path.compact.each do |path|
             f = File.join(path, relative_file)
-            if File.exists?(f)
+            if File.exist?(f)
               return f
             end
           end

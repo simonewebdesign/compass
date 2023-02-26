@@ -6,7 +6,7 @@ module Compass::Core::SassExtensions::Functions::ImageSize
     width, _ = image_dimensions(image_file)
     number(width, "px")
   end
-  
+
   # Returns the height of the image relative to the images directory
   def image_height(image_file)
     _, height = image_dimensions(image_file)
@@ -53,10 +53,10 @@ private
     options[:compass][:image_dimensions] ||= {}
     options[:compass][:image_dimensions][image_file] = ImageProperties.new(image_path_for_size(image_file)).size
   end
-  
+
   def image_path_for_size(image_file)
-    if File.exists?(image_file)
-      return image_file 
+    if File.exist?(image_file)
+      return image_file
     end
     real_path(image_file)
   end

@@ -7,7 +7,7 @@ module Compass::Core::SassExtensions::Functions::Files
   def md5sum(file, format = nil)
     assert_type file, :String
     filename = nil
-    if options[:css_filename] && File.exists?(options[:css_filename])
+    if options[:css_filename] && File.exist?(options[:css_filename])
       filename = File.expand_path(file.value, File.dirname(options[:css_filename]))
     elsif Pathname.new(file.value).absolute?
       filename = file.value
@@ -30,4 +30,3 @@ module Compass::Core::SassExtensions::Functions::Files
   declare :md5sum, [:file]
   declare :md5sum, [:file, :format]
 end
-

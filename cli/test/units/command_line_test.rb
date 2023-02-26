@@ -21,7 +21,7 @@ class CommandLineTest < Test::Unit::TestCase
   def test_basic_install
     within_tmp_directory do
       compass(*%w(create --boring basic))
-      assert File.exists?("basic/sass/screen.scss")
+      assert File.exist?("basic/sass/screen.scss")
       assert_action_performed :directory, "basic/"
       assert_action_performed    :create, "basic/sass/screen.scss"
     end
@@ -34,8 +34,8 @@ class CommandLineTest < Test::Unit::TestCase
     define_method "test_#{framework.name}_installation" do
       within_tmp_directory do
         compass(*%W(create --boring --using #{framework.name} #{framework.name}_project))
-        assert File.exists?("#{framework.name}_project/sass/screen.scss"), "sass/screen.scss is missing. Found: #{Dir.glob("#{framework.name}_project/**/*").join(", ")}"
-        assert File.exists?("#{framework.name}_project/stylesheets/screen.css")
+        assert File.exist?("#{framework.name}_project/sass/screen.scss"), "sass/screen.scss is missing. Found: #{Dir.glob("#{framework.name}_project/**/*").join(", ")}"
+        assert File.exist?("#{framework.name}_project/stylesheets/screen.css")
         assert_action_performed :directory, "#{framework.name}_project/"
         assert_action_performed    :create, "#{framework.name}_project/sass/screen.scss"
         assert_action_performed    :write, "#{framework.name}_project/stylesheets/screen.css"

@@ -21,7 +21,7 @@ module Compass
         end
 
         def config_files_exist?
-          File.exists? targetize('config.rb')
+          File.exist? targetize('config.rb')
         end
 
         def config_contents

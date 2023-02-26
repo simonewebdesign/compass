@@ -16,9 +16,9 @@ class LayoutTest < Test::Unit::TestCase
   def teardown
     clean_up_sprites
   end
-    
+
   # HELPERS
-  
+
   def vertical
     opts = @options.merge("layout" => Sass::Script::String.new('vertical'))
 
@@ -91,12 +91,12 @@ class LayoutTest < Test::Unit::TestCase
     assert_equal [0, 0, 0, 0], vert.images.map(&:left)
     assert vert.vertical?
   end
-  
+
   it "should have a vertical layout with spacing" do
     vert = sprite_map_test(@options.merge({"spacing" => Sass::Script::Number.new(10, ['px'])}))
     assert_equal [0, 20, 40, 60], vert.images.map(&:top)
   end
-  
+
   it "should layout vertical with position" do
     vert = sprite_map_test("selectors_ten_by_ten_active_position" => Sass::Script::Number.new(10, ['px']))
     assert_equal [0, 10, 0, 0], vert.images.map(&:left)
@@ -109,7 +109,7 @@ class LayoutTest < Test::Unit::TestCase
   end
 
   # SMART LAYOUT
-  
+
   it "should have a smart layout" do
     base = smart
     base.generate
@@ -117,12 +117,12 @@ class LayoutTest < Test::Unit::TestCase
     assert_equal 400, base.width
     assert_equal 60, base.height
     assert_equal [[0, 0], [20, 120], [20, 0], [20, 100], [20, 160]], base.images.map {|i| [i.top, i.left]}
-    assert File.exists?(base.filename)
+    assert File.exist?(base.filename)
     FileUtils.rm base.filename
   end
 
   # DIAGONAL LAYOUT
-  
+
   it "should generate a diagonal sprite" do
     base = diagonal
     base.generate
@@ -130,25 +130,25 @@ class LayoutTest < Test::Unit::TestCase
     assert_equal 40, base.width
     assert_equal 40, base.height
     assert_equal [[30, 0], [20, 10], [10, 20], [0, 30]], base.images.map {|i| [i.top, i.left]}
-    assert File.exists?(base.filename)
+    assert File.exist?(base.filename)
     FileUtils.rm base.filename
   end
 
   # HORIZONTAL LAYOUT
-  
+
   it "should have a horizontal layout" do
     base = horizontal
     assert base.horizontal?
     assert_equal 10, base.height
     assert_equal 40, base.width
   end
-  
+
   it "should layout images horizontaly" do
     base = horizontal
     assert_equal [0, 10, 20, 30], base.images.map(&:left)
     assert_equal [0, 0, 0, 0],  base.images.map(&:top)
   end
-  
+
   it "should layout horizontaly with spacing" do
     base = horizontal("spacing" => Sass::Script::Number.new(10, ['px']))
     assert_equal [0, 20, 40, 60], base.images.map(&:left)
@@ -162,19 +162,19 @@ class LayoutTest < Test::Unit::TestCase
     assert_equal [5, 0], base.images.map(&:top)
     assert_equal 50, base.width
   end
-  
+
   it "should layout horizontaly with position" do
     base = horizontal("selectors_ten_by_ten_active_position" => Sass::Script::Number.new(10, ['px']))
     assert_equal [0, 10, 0, 0], base.images.map(&:top)
     assert_equal 40, base.width
     assert_equal 20, base.height
   end
-  
+
   it "should generate a horrizontal sprite" do
     base = horizontal
     base.generate
-    assert File.exists?(base.filename)
+    assert File.exist?(base.filename)
     FileUtils.rm base.filename
   end
-    
+
 end

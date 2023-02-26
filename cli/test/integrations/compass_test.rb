@@ -46,7 +46,7 @@ class CompassTest < Test::Unit::TestCase
   def test_empty_project
     # With no sass files, we should have no css files.
     within_project(:empty) do |proj|
-      return unless proj.css_path && File.exists?(proj.css_path)
+      return unless proj.css_path && File.exist?(proj.css_path)
       Dir.new(proj.css_path).each do |f|
         fail "This file should not have been generated: #{f}" unless f == "." || f == ".."
       end
@@ -186,7 +186,7 @@ private
 
   def within_project(project_name, config_block = nil)
     @current_project = project_name
-    Compass.add_configuration(configuration_file(project_name)) if File.exists?(configuration_file(project_name))
+    Compass.add_configuration(configuration_file(project_name)) if File.exist?(configuration_file(project_name))
     Compass.configuration.project_path = project_path(project_name)
     Compass.configuration.environment = :production
     Compass.configuration.sourcemap = false unless Compass.configuration.sourcemap_set?
@@ -195,7 +195,7 @@ private
       config_block.call(Compass.configuration)
     end
 
-    if Compass.configuration.sass_path && File.exists?(Compass.configuration.sass_path)
+    if Compass.configuration.sass_path && File.exist?(Compass.configuration.sass_path)
       compiler = Compass.sass_compiler
       compiler.logger = Compass::NullLogger.new
       compiler.clean!
@@ -221,7 +221,7 @@ private
 
   def save_output(dir)
     FileUtils.rm_rf(save_path(dir))
-    FileUtils.cp_r(tempfile_path(dir), save_path(dir)) if File.exists?(tempfile_path(dir))
+    FileUtils.cp_r(tempfile_path(dir), save_path(dir)) if File.exist?(tempfile_path(dir))
   end
 
   def project_path(project_name)

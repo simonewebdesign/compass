@@ -75,7 +75,7 @@ private
     for name in arguments
       actual_result_file = "#{tempfile_path(@current_project)}/#{name}".gsub(/s[ac]ss/, "css")
       expected_result_file = "#{result_path(@current_project)}/#{name}.#{Sass.version[:major]}.#{Sass.version[:minor]}".gsub(/s[ac]ss/, "css")
-      expected_result_file = "#{result_path(@current_project)}/#{name}".gsub(/s[ac]ss/, "css") unless File.exists?(expected_result_file)
+      expected_result_file = "#{result_path(@current_project)}/#{name}".gsub(/s[ac]ss/, "css") unless File.exist?(expected_result_file)
       actual_lines = File.read(actual_result_file)
       actual_lines.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
       actual_lines = actual_lines.split("\n").reject{|l| l=~/\A\Z/}
@@ -140,7 +140,7 @@ private
 
   def save_output(dir)
     FileUtils.rm_rf(save_path(dir))
-    FileUtils.cp_r(tempfile_path(dir), save_path(dir)) if File.exists?(tempfile_path(dir))
+    FileUtils.cp_r(tempfile_path(dir), save_path(dir)) if File.exist?(tempfile_path(dir))
   end
 
   def projects

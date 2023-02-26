@@ -4,7 +4,7 @@ class SpriteCommandTest < Test::Unit::TestCase
   include Compass::TestCaseHelper
   include Compass::CommandLineHelper
   include Compass::IoHelper
-  
+
   attr_reader :test_dir
   include SpriteHelper
   def setup
@@ -16,7 +16,7 @@ class SpriteCommandTest < Test::Unit::TestCase
       f << config_data
     end
   end
-  
+
   def config_data
     return <<-CONFIG
       images_path = "#{@images_tmp_path}"
@@ -42,14 +42,14 @@ class SpriteCommandTest < Test::Unit::TestCase
   def teardown
     ::Dir.chdir @before_dir
     clean_up_sprites
-    if File.exists?(@test_dir)
+    if File.exist?(@test_dir)
       ::FileUtils.rm_r @test_dir
     end
   end
 
   it "should create sprite file" do
     assert_equal 0, run_compass_with_options(['sprite', "-f", 'stylesheet.scss', "squares/*.png"]).to_i
-    assert File.exists?(File.join(test_dir, 'stylesheet.scss'))
+    assert File.exist?(File.join(test_dir, 'stylesheet.scss'))
   end
 
 end
